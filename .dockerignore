@@ -1,0 +1,8 @@
+vendor
+node_modules
+.env
+.env.*
+.idea
+.vscode
+storage/*.key
+.DS_Store

@@ -31,6 +31,30 @@ services:
       db:
         condition: service_healthy
 
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nombre_api_app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+
+  web:
+    image: nginx:1.25-alpine
+    container_name: nombre_api_web
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www/html:ro
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+
 volumes:
   db_data:
     name: nombre_api_db_data

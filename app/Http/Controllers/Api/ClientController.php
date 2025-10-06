@@ -34,7 +34,7 @@ class ClientController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', Rule::unique('clients', 'email')],
+            'email' => ['required', 'email', Rule::unique('client', 'email')],
             'phone' => ['nullable', 'string', 'max:20'],
             'address' => ['nullable', 'string', 'max:255'],
             'birthdate' => ['nullable', 'date'],
@@ -61,7 +61,7 @@ class ClientController extends Controller
             'email' => [
                 'required',
                 'email',
-                Rule::unique('clients', 'email')->ignore($client->id),
+                Rule::unique('client', 'email')->ignore($client->id),
             ],
             'phone' => ['nullable', 'string', 'max:20'],
             'address' => ['nullable', 'string', 'max:255'],
